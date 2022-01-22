@@ -2,3 +2,6 @@ name: Airdrops
 version: '${project.version}'
 main: io.paradaux.airdrops.Airdrops
 api-version: 1.18
+commands:
+  triggerairdrop:
+    description: Triggers an Airdrop
