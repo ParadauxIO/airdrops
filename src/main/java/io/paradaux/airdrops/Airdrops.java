@@ -1,10 +1,10 @@
 package io.paradaux.airdrops;
 
-import io.paradaux.airdrops.adventure.AdventureImpl;
-import io.paradaux.airdrops.commands.TriggerAirdropCommand;
-import io.paradaux.airdrops.config.Config;
-import io.paradaux.airdrops.config.ConfigLoader;
-import io.paradaux.airdrops.events.DrinkReminder;
+import io.paradaux.airdrops.core.AdventureImpl;
+import io.paradaux.airdrops.commands.AirdropCommand;
+import io.paradaux.airdrops.config.AirdropConfig;
+import io.paradaux.airdrops.core.AirdropManager;
+import io.paradaux.airdrops.events.AirdropOpenEvent;
 import io.paradaux.airdrops.tasks.DropTask;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -15,17 +15,15 @@ import java.io.File;
 
 public final class Airdrops extends JavaPlugin {
 
-    private static Config config;
-    public static Config getAirdropConfig() {
+    private static AirdropConfig config;
+    public static AirdropConfig getAirdropConfig() {
         return config;
     }
 
-    private static Runnable dropTask;
-    private static AdventureImpl adventure;
+    private Runnable dropTask;
+    private AdventureImpl adventure;
 
-    public static Runnable getDropTask() {
-        return dropTask;
-    }
+    private AirdropManager airdrop;
 
     @Override
     public void onEnable() {
@@ -34,10 +32,12 @@ public final class Airdrops extends JavaPlugin {
 
         adventure = new AdventureImpl(this);
         try {
-            config = ConfigLoader.getConfig(new File(getDataFolder(), "config.yml"));
+            config = AirdropConfig.loadConfig(new File(getDataFolder(), "config.yml"));
         } catch (ConfigurateException e) {
             System.exit(1);
         }
+
+        this.airdrop = new AirdropManager(config);
 
         registerTasks();
         registerCommands();
@@ -50,14 +50,15 @@ public final class Airdrops extends JavaPlugin {
     }
 
     public void registerCommands() {
-        this.getCommand("triggerairdrop").setExecutor(new TriggerAirdropCommand());
+        this.getCommand("triggerairdrop").setExecutor(new AirdropCommand(airdrop));
     }
 
     private void registerEvents(PluginManager man) {
-        man.registerEvents(new DrinkReminder(this), this);
+        man.registerEvents(new AirdropOpenEvent(airdrop), this);
     }
+
     public void registerTasks() {
-        dropTask = new DropTask(this);
+        dropTask = new DropTask(airdrop);
         Bukkit.getScheduler().runTaskTimer(
                 this, dropTask, 20, (long) config.getInterval() * 60 * 20);
     }

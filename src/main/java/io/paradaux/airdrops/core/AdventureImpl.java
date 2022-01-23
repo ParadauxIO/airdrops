@@ -21,7 +21,7 @@
  * See LICENSE.md for more details.
  */
 
-package io.paradaux.airdrops.adventure;
+package io.paradaux.airdrops.core;
 
 
 import io.paradaux.airdrops.Airdrops;
@@ -36,7 +36,6 @@ import java.io.IOException;
 /**
  * AdventureImpl is a wrapper around the kyori/adventure Framework for Minecraft Components.
  * @author Rían Errity
- * @since 2.0.0
  * */
 public class AdventureImpl implements AutoCloseable {
 

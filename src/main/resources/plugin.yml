@@ -3,5 +3,7 @@ version: '${project.version}'
 main: io.paradaux.airdrops.Airdrops
 api-version: 1.18
 commands:
-  triggerairdrop:
-    description: Triggers an Airdrop
+  airdrop:
+    description: Airdrop Command
+    usage: /airdrop <trigger/tp>
+    permission: airdrop.command

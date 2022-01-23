@@ -2,6 +2,43 @@ startX: -2000
 startZ: -1000
 
 endX: 2000
-endY: 2000
+endZ: 2000
 
 interval: 45
+
+drop-message:
+  - "<gradient:#5e4fa2:#f79459:red>||||||||||||||||||||||||||||||||||||||||||||||||</gradient>"
+  - "<bold><red>Stop What you're doing!</red></bold>"
+  - "<gradient:green:blue>An airdrop has landed at</gradient> <yellow>%airdrop_x% %airdrop_y% %airdrop_z%</yellow>"
+  - "<gradient:#5e4fa2:#f79459:red>||||||||||||||||||||||||||||||||||||||||||||||||</gradient>"
+
+world: world
+
+rewards:
+  - BONE
+  - GUNPOWDER
+  - ROTTEN_FLESH
+  - STRING
+  - WHEAT
+  - BREAD
+  - NAME_TAG
+  - SADDLE
+  - COAL
+  - REDSTONE
+  - GOLDEN_APPLE
+  - ENDER_PEARL
+  - ENDER_EYE
+  - IRON_INGOT
+  - DIAMOND
+  - DIAMOND_CHESTPLATE
+  - DIAMOND_PICKAXE
+  - NETHERITE_SWORD
+  - GOLD_INGOT
+  - BAKED_POTATO
+  - SHIELD
+  - BOW
+  - RAW_GOLD
+  - RAW_IRON
+  - RAW_COPPER
+  - CLOCK
+  - COMPASS
